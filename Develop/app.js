@@ -10,61 +10,161 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+function init() {
+    function promptUser() {
+        let answers = await inquirer.prompt([
+            {
+                type: "list",
+                name: "role",
+                message: "What is the employees role?",
+                choice: [
+                    "Manager",
+                    "Engineer",
+                    "Intern"
+                ]
+            }
+        ]).then(function (data) {
+            switch (data) {
+                case data.choices === "Manager":
+                    promptManager(data.choice);
+                    break;
+                case data.choices === "Engineer":
+                    promptEngineer(data.choice);
+                    break;
+                case data.choices === "Intern":
+                    promptIntern(data.choice);
+                    break;
+                default:
+                    buildTeam();
+                    break;
+            }
 
-function promptUser() {
-    let answers = await inquirer.prompt([
-        {
-            type: "list",
-            message: "What is the employees role?",
-            name: "role",
-            choices: [
-                "Manager",
-                "Engineer",
-                "Intern"
-            ]
-        }
-    ]).then(function (data) {
-        if (data.choices === "Manager") {
-            promptManager();
-        }
-        else if (data.choices === "Engineer") {
-            promptEngineer();
-        }
-        else if (data.choices === "Inter") {
-            promptIntern();
-        }
-        else {
-            return console.log("Something went wrong. Please try again");
-        }
+            // if (data.choices === "Manager") {
+            //     promptManager();
+            // }
+            // else if (data.choices === "Engineer") {
+            //     promptEngineer();
+            // }
+            // else if (data.choices === "Inter") {
+            //     promptIntern();
+            // }
+            // else {
+            //     return console.log("Something went wrong. Please try again");
+            // }
+        })
     }
+
+    function promptManager() {
+        let answers = await inquirer.prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the managers name"
+            },
+            {
+                type: "input",
+                name: 'id',
+                message: "What is the managers I.D."
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is the managers email address?"
+            },
+            {
+                type: "input",
+                name: "office number",
+                message: "What is the managers office number?"
+            }
+
+        ]).then(function (data) {
+            const manager = new Manager(data responses here)
+        })
+    }
+
+    function promptEngineer() {
+        let answers = await inquirer.prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the managers name"
+            },
+            {
+                type: "input",
+                name: 'id',
+                message: "What is the managers I.D."
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is the managers email address?"
+            },
+            {
+                type: "input",
+                name: "office number",
+                message: "What is the managers office number?"
+            }
+
+        ]).then(function (data) {
+
+        })
+    }
+
+    function promptIntern() {
+        let answers = await inquirer.prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the managers name"
+            },
+            {
+                type: "input",
+                name: 'id',
+                message: "What is the managers I.D."
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is the managers email address?"
+            },
+            {
+                type: "input",
+                name: "office number",
+                message: "What is the managers office number?"
+            }
+
+        ]).then(function (data) {
+
+        })
+    }
+    function createTeam() {
+
+    }
+
+    function buildTeam() {
+        fs.tobuild team
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    promptUser();
 }
-
-function promptManager() {
-    let answers = await inquirer.prompt([
-        {
-            type: "input",
-            name: "name",
-            message: "What is the managers name"
-        },
-        {
-            type: "input",
-            name: 'id',
-            message: "What is the managers I.D."
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "What is the managers email address?"
-        },
-        {
-            type: "input",
-            name: "office number",
-            message: "What is the managers office number?"
-        }
-
-    ])
-}
-
+// all functions should be in one massive function
+init();
 // if answer = engineer then run engineer function for questions
 
 
