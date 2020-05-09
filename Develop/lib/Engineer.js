@@ -14,4 +14,7 @@ class Engineer extends Employee {
         return "Engineer"
     }
 }
+Engineer.prototype.getGithub = function() {
+    return this.github;
+}
 module.exports = Engineer;
