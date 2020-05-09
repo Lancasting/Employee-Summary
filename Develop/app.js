@@ -7,7 +7,7 @@ const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-
+const employees = [];
 const render = require("./lib/htmlRenderer");
 const questions = [
     {
@@ -37,50 +37,57 @@ const initEmployee = async () => {
     const { role, name, id, email } = await inquirer.prompt(questions);
 
     switch (role) {
-        case "Manager":
-            const { promptManager } = await inquirer.prompt({
+        case "manager":
+            const { officeNumber } = await inquirer.prompt({
                 message: "Office number?",
-                name: "officenumber"
+                name: "officeNumber"
             })
             employees.push(new Manager(name, id, email, officeNumber))
             break;
-        case "Intern":
-            const { promptIntern } = await inquirer.prompt({
+        case "intern":
+            const { school } = await inquirer.prompt({
                 message: "What School does this person attend?",
                 name: "school"
             })
             employees.push(new Intern(name, id, email, school))
             break;
-        case "Engineer":
-            const { promptEngineer } = await inquirer.prompt({
+        case "engineer":
+            const { github } = await inquirer.prompt({
                 message: "What is their github username?",
                 name: "github"
             })
-            employees.push(new Manager(name, id, email, github))
+            employees.push(new Engineer(name, id, email, github))
             break;
     }
-    const init = async (employees) => {
-        const { newEmployee } = await inquirer.prompt({
-            type: "confirm",
-            name: "newEmployee",
-            message: "Do you want to add another?"
-        })
-        if (newEmployee) {
-            initEmployee();
-        }
-        else if (employees.length > 0) {
-            if (fs.existsSync(OUTPUT_DIR)) {
-                return fs.writeFile(outputPath, render(employees))
-            } else {
-                return fs.mkdir(OUTPUT_DIR); err => {
-                    if (err) throw err
-                }
-            }
-        }
-    }
+
     init();
 }
-initEmployee();
+
+const init = async () => {
+    const { newEmployee } = await inquirer.prompt({
+        type: "confirm",
+        name: "newEmployee",
+        message: "Do you want to add an Employee?"
+    })
+    if (newEmployee) {
+        initEmployee();
+    }
+    else {
+        if (employees.length > 0) {
+            if (fs.existsSync(OUTPUT_DIR)) {
+                return fs.writeFileSync(outputPath, render(employees))
+            } else {
+                return fs.mkdir(OUTPUT_DIR, err => {
+                    if (err) throw err;
+                    return fs.writeFileSync(outputPath, render(employees))
+                })
+            }
+        } else {
+            console.log('Get outta here')
+        }
+    }
+}
+init();
 // if (data.choices === "Manager") {
 //     promptManager();
 // }
