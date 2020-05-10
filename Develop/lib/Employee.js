@@ -7,18 +7,6 @@ class Employee {
         this.email = email;
 
     }
-    // getName(){
-    //     return this.name;
-    // }
-    // getId(){
-    //     return this.id;
-    // }
-    // getEmail(){
-    //     return this.email;
-    // }
-    // getRole(){
-    //     return "Employee";
-    // }
 }
 Employee.prototype.getName = function() {
     return this.name;

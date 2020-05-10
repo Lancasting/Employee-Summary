@@ -1,0 +1,15 @@
+.jumbotron {
+    background-color: black;
+}
+body {
+    color: rgb(165, 245, 205);
+}
+.card-header{
+    background-color: rgb(44, 44, 44);
+}
+.card-body{
+    background-color: black;
+}
+.list-group-item{
+    background-color: black;
+}
