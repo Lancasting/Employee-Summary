@@ -7,14 +7,15 @@ class Engineer extends Employee {
         this.github = github;
 
     }
-    getGithub() {
-        return this.github;
-    }
-    getRole() {
-        return "Engineer"
-    }
+    // getRole() {
+    //     return "Engineer"
+    // }
 }
 Engineer.prototype.getGithub = function() {
     return this.github;
 }
+Engineer.prototype.getRole = function() {
+    return "Engineer"
+}
+
 module.exports = Engineer;
